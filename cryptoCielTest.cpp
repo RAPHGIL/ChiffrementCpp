@@ -1,17 +1,27 @@
-// RsaCiel.cpp : Ce fichier contient la fonction 'main'. L'exécution du programme commence et se termine à cet endroit.
-//
-
 #include <iostream>
 #include "RsaGestion.h"
 #include "Hashgestion.h"
 #include "AesGestion.h"
+#include <fstream>
 
 int main()
 {
-	HashGestion LM;
-	std::string monMessageHash = "RaphaelG";
-	std::cout << LM.CalculateSHA256(monMessageHash) << std::endl;
+    HashGestion LM;
+    std::string monMessageHash = "Crypto.txt";
+    std::cout << LM.CalculateSHA256(monMessageHash) << std::endl;
+
+    AesGestion AES;
+    AES.GenerateAESKey();
+    AES.SaveAESKeyToFile("ClefAES.txt");
+    AES.EncryptFileAES256("Mess.txt", "EncryptAES.txt");
+    AES.DecryptFileAES256("EncryptAES.txt", "DecryptAES.txt");
+
+    RsaGestion RSA;
+    RSA.generationClef("RSAPublic.pem", "RSAPrive.pem", 4096);
+    std::string MessageEncrypt = "Guitare ";
+    std::string MessageCrypt = RSA.chiffrementRsa(MessageEncrypt);
+    std::cout << MessageCrypt << std::endl;
+    std::string MessageDecrypt = RSA.dechiffrementRsa(MessageCrypt);
+    std::cout << MessageDecrypt << std::endl;
 
 }
-
-
