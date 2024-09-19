@@ -9,7 +9,7 @@
 int main()
 {
 	HashGestion LM;
-	std::string monMessageHash = "Super message superchouette";
+	std::string monMessageHash = "RaphaelG";
 	std::cout << LM.CalculateSHA256(monMessageHash) << std::endl;
 
 }
